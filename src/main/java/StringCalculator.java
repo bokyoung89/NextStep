@@ -3,7 +3,7 @@ public class StringCalculator {
         if(isBlank(text)){
             return 0;
         }
-        return sum(split(text));
+        return sum(toInts(split(text)));
     }
 
     private boolean isBlank(String text) {
@@ -15,10 +15,19 @@ public class StringCalculator {
         return values;
     }
 
-    private int sum(String[] values) {
+    private int[] toInts(String[] values){
+        int[] numbers = new int[values.length];
+        for (int i=0; i<values.length; i++){
+            numbers[i] = Integer.parseInt(values[i]);
+        }
+        return numbers;
+
+    }
+
+    private int sum(int[] numbers) {
         int sum = 0;
-        for (String value: values) {
-            sum += Integer.parseInt(value);
+        for (int number: numbers) {
+            sum += number;
         }
         return sum;
     }
