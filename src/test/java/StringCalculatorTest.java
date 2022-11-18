@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
 
@@ -27,5 +28,20 @@ public class StringCalculatorTest {
         assertEquals(3,cal.add("1,2"));
     }
 
+    @Test
+    public void add_쉼표_또는_콜론_구분자(){
+        assertEquals(6, cal.add("1,2:3"));
+    }
 
+    @Test
+    public void add_custom_구분자(){
+        assertEquals(6, cal.add("//;\n1;2;3"));
+    }
+
+    @Test
+    public void add_nagative(){
+        assertThrows(RuntimeException.class, () -> {
+            cal.add("-1,2,3");
+        });
+    }
 }
